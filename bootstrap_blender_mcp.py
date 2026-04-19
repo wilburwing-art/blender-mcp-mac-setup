@@ -3,7 +3,7 @@ import os
 import sys
 
 ADDON_FILE = os.path.expanduser("~/Desktop/addon.py")
-MODULE_NAME = "addon"
+MODULE_NAME = os.path.splitext(os.path.basename(ADDON_FILE))[0].replace("-", "_")
 
 def die(msg):
     print(f"[bootstrap] FATAL: {msg}", file=sys.stderr)

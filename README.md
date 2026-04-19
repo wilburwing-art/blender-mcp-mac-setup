@@ -19,7 +19,7 @@ Each phase is a natural stopping point if you hit friction.
 git clone https://github.com/wilburwing-art/blender-mcp-mac-setup.git
 cd blender-mcp-mac-setup
 curl -sSL -o ~/Desktop/addon.py https://raw.githubusercontent.com/ahujasid/blender-mcp/main/addon.py
-/Applications/Blender.app/Contents/MacOS/Blender --python bootstrap_blender_mcp.py
+/Applications/Blender.app/Contents/MacOS/Blender --python bootstrap_blender_mcp.py -- ~/Desktop/addon.py
 ```
 
 `bootstrap_blender_mcp.py` installs the addon, enables it, saves prefs, and starts the MCP server on port 9876. Blender stays running with the server listening. Skip to Phase 3.

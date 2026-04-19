@@ -2,7 +2,14 @@ import bpy
 import os
 import sys
 
-ADDON_FILE = os.path.expanduser("~/Desktop/addon.py")
+DEFAULT_ADDON_FILE = os.path.expanduser("~/Desktop/addon.py")
+
+if "--" in sys.argv:
+    extra = sys.argv[sys.argv.index("--") + 1:]
+    ADDON_FILE = os.path.expanduser(extra[0]) if extra else DEFAULT_ADDON_FILE
+else:
+    ADDON_FILE = DEFAULT_ADDON_FILE
+
 MODULE_NAME = os.path.splitext(os.path.basename(ADDON_FILE))[0].replace("-", "_")
 
 def die(msg):

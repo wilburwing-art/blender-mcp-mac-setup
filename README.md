@@ -102,4 +102,20 @@ Grab the **Classroom** or **Junk Shop** demo from [blender.org/download/demo-fil
 
 ## Troubleshooting
 
-Work through Phase 1 to 4 first. If something breaks, the error message usually tells the story — capture it and work from there.
+**Claude Desktop shows no tools icon / says the `blender` server failed to start.**
+Usually a PATH issue: Claude Desktop's environment doesn't include Homebrew. Make sure the config uses the full path from `which uvx` (e.g. `/opt/homebrew/bin/uvx`), not bare `uvx`. Fully quit (Cmd+Q) and reopen after editing the config.
+
+**`lsof -iTCP:9876 -sTCP:LISTEN` prints nothing after Option A.**
+The addon installed but `start_server` couldn't run. Look at Blender's system console: Window > Toggle System Console on macOS shows nothing helpful — instead re-run the bootstrap from Terminal so stderr prints in your shell. Common causes: the module name didn't match the filename (bootstrap now derives this automatically), or another process is already on port 9876 (`lsof -iTCP:9876` to find it).
+
+**`addon_enable` fails with "module 'X' not found".**
+Blender's `addon_install` copies the file to `~/Library/Application Support/Blender/<ver>/scripts/addons/` keeping the filename. If the filename contains hyphens or other non-identifier characters, Python can't import it. The bootstrap renames `-` to `_`; if you're installing manually, save the addon as `addon.py` or another valid Python module name.
+
+**Blender 4.x vs 5.x.**
+The upstream addon (ahujasid/blender-mcp) supports both. This guide is tested on 5.1.1. If you hit a 4.x-specific issue, pin to an older addon commit.
+
+**Port 9876 is already in use.**
+Another Blender instance is still running. `pgrep -l -i blender` to find it, quit or kill it, then retry.
+
+**Changed the config, Claude Desktop still doesn't see the server.**
+You didn't fully quit. Closing the window is not enough — use Cmd+Q or `osascript -e 'tell application "Claude" to quit'`, then reopen.

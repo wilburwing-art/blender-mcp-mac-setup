@@ -18,7 +18,9 @@ Each phase is a natural stopping point if you hit friction.
 ```bash
 git clone https://github.com/wilburwing-art/blender-mcp-mac-setup.git
 cd blender-mcp-mac-setup
-curl -sSL -o ~/Desktop/addon.py https://raw.githubusercontent.com/ahujasid/blender-mcp/main/addon.py
+# Pinned to a commit tested with this guide — bump when you want to track upstream
+ADDON_SHA=7636d13bded82eca58eb93c3f4cd8708dfdfbe8b
+curl -sSL -o ~/Desktop/addon.py "https://raw.githubusercontent.com/ahujasid/blender-mcp/$ADDON_SHA/addon.py"
 /Applications/Blender.app/Contents/MacOS/Blender --python bootstrap_blender_mcp.py -- ~/Desktop/addon.py
 ```
 
@@ -26,7 +28,7 @@ curl -sSL -o ~/Desktop/addon.py https://raw.githubusercontent.com/ahujasid/blend
 
 ### Option B — manual GUI
 
-1. Go to [github.com/ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) and download `addon.py` from the repo.
+1. Go to [github.com/ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) and download `addon.py` from the repo (or pin a specific commit — Option A does this for you).
 2. Open Blender, go to **Edit > Preferences > Add-ons > Install from Disk**, pick `addon.py`.
 3. Tick the checkbox to enable **Interface: Blender MCP**.
 4. Close preferences, press **N** in the 3D viewport, you'll see a **BlenderMCP** tab in the sidebar. Don't click Start yet.

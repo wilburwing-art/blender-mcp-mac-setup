@@ -1,0 +1,31 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax-check bootstrap script
+        run: python -m py_compile bootstrap_blender_mcp.py
+      - name: Validate README JSON blocks
+        run: |
+          python - <<'EOF'
+          import re, json, sys, pathlib
+          src = pathlib.Path("README.md").read_text()
+          blocks = re.findall(r"```json\n(.*?)```", src, re.S)
+          for i, b in enumerate(blocks):
+              try:
+                  json.loads(b)
+              except Exception as e:
+                  print(f"JSON block {i} invalid: {e}", file=sys.stderr)
+                  sys.exit(1)
+          print(f"OK: {len(blocks)} JSON block(s) valid")
+          EOF

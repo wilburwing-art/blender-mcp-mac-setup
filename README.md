@@ -69,8 +69,22 @@ Fully quit Claude Desktop (**Cmd+Q**, not just close the window) and reopen it.
 ## Phase 4: First run
 
 1. **If you used Option A**, the server is already listening — skip to step 2. **If Option B**, click **Start MCP Server** in the BlenderMCP sidebar. It should say `MCP Server started on port 9876`.
-2. In Claude Desktop, start a new chat. You should see a tools icon indicating Blender MCP is connected.
-3. Type `get scene information` as your first test. If that works, you're wired up.
+2. Confirm the server is actually listening, independent of Claude Desktop:
+
+   ```bash
+   lsof -iTCP:9876 -sTCP:LISTEN
+   ```
+
+   You should see `Blender` as the owning process. If nothing prints, the addon didn't start the server — check Blender's system console for errors.
+
+   For an end-to-end socket smoke test (should print scene JSON):
+
+   ```bash
+   python3 -c 'import socket,json; s=socket.socket(); s.connect(("localhost",9876)); s.sendall(json.dumps({"type":"get_scene_info"}).encode()); print(s.recv(4096).decode()[:300])'
+   ```
+
+3. In Claude Desktop, start a new chat. You should see a tools icon indicating Blender MCP is connected.
+4. Type `get scene information` as your first test. If that works, you're wired up.
 
 ## Phase 5: Voice
 

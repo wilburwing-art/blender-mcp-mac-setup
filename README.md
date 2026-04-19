@@ -94,7 +94,28 @@ Whisper-based alternatives like [Superwhisper](https://superwhisper.com/) or [Ma
 
 ## Phase 6: A file to play with
 
-Grab the **Classroom** or **Junk Shop** demo from [blender.org/download/demo-files](https://www.blender.org/download/demo-files/), open it in Blender, then try voice commands like:
+Grab the Classroom demo (~70MB zipped) directly:
+
+```bash
+mkdir -p ~/Desktop/blender-demos && cd ~/Desktop/blender-demos
+curl -sLO https://download.blender.org/demo/test/classroom.zip
+unzip -oq classroom.zip
+```
+
+Open `~/Desktop/blender-demos/classroom/classroom.blend` in Blender, or tell the running server to open it via MCP:
+
+```bash
+python3 -c '
+import socket, json
+s = socket.socket(); s.connect(("localhost", 9876))
+s.sendall(json.dumps({"type": "execute_code", "params": {"code": "import bpy; bpy.ops.wm.open_mainfile(filepath=\"'"$HOME"'/Desktop/blender-demos/classroom/classroom.blend\")"}}).encode())
+print(s.recv(4096).decode()[:300])
+'
+```
+
+Browse the full demo-file gallery at [blender.org/download/demo-files](https://www.blender.org/download/demo-files/).
+
+Then try voice commands like:
 
 - "describe the scene"
 - "add a bright orange cube floating above the main desk"

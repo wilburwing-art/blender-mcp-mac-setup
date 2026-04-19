@@ -6,7 +6,7 @@ Each phase is a natural stopping point if you hit friction.
 
 ## Phase 1: Install the pieces
 
-1. **Blender**: download from [blender.org](https://www.blender.org/download/) and drag to Applications (grab 4.x).
+1. **Blender**: download from [blender.org](https://www.blender.org/download/) and drag to Applications, or `brew install --cask blender`. Tested with Blender 5.1.x; the upstream addon also supports 4.x.
 2. **Claude Desktop**: [claude.ai/download](https://claude.ai/download) — the mobile or web app can't run MCP servers, has to be desktop.
 3. **uv** (provides the `uvx` command the MCP server needs): in Terminal run `brew install uv`, or if you don't have Homebrew: `curl -LsSf https://astral.sh/uv/install.sh | sh`.
 4. Confirm `uvx` is installed: `which uvx`. Copy that full path somewhere, you'll need it.

@@ -46,4 +46,7 @@ def start_server():
         print(f"[bootstrap] failed to start server: {e}", file=sys.stderr)
     return None
 
+# Defer start_server: --python runs before Blender's event loop is ready, so
+# calling bpy.ops.blendermcp.start_server() now fails with a context error.
+# The timer queues it onto the first UI tick after startup.
 bpy.app.timers.register(start_server, first_interval=1.0)

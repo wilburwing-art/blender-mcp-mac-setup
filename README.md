@@ -13,6 +13,17 @@ Each phase is a natural stopping point if you hit friction.
 
 ## Phase 2: Install the Blender addon
 
+### Option A — one-liner (skips the GUI)
+
+```bash
+curl -sSL -o ~/Desktop/addon.py https://raw.githubusercontent.com/ahujasid/blender-mcp/main/addon.py
+/Applications/Blender.app/Contents/MacOS/Blender --python bootstrap_blender_mcp.py
+```
+
+`bootstrap_blender_mcp.py` (in this repo) installs the addon, enables it, saves prefs, and starts the MCP server on port 9876. Blender stays running with the server listening. Skip to Phase 3.
+
+### Option B — manual GUI
+
 1. Go to [github.com/ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) and download `addon.py` from the repo.
 2. Open Blender, go to **Edit > Preferences > Add-ons > Install from Disk**, pick `addon.py`.
 3. Tick the checkbox to enable **Interface: Blender MCP**.

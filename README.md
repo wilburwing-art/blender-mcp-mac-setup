@@ -68,7 +68,7 @@ Fully quit Claude Desktop (**Cmd+Q**, not just close the window) and reopen it.
 
 ## Phase 4: First run
 
-1. In Blender, click **Start MCP Server** in the BlenderMCP sidebar. It should say `MCP Server started on port 9876`.
+1. **If you used Option A**, the server is already listening — skip to step 2. **If Option B**, click **Start MCP Server** in the BlenderMCP sidebar. It should say `MCP Server started on port 9876`.
 2. In Claude Desktop, start a new chat. You should see a tools icon indicating Blender MCP is connected.
 3. Type `get scene information` as your first test. If that works, you're wired up.
 

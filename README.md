@@ -33,13 +33,11 @@ curl -sSL -o ~/Desktop/addon.py https://raw.githubusercontent.com/ahujasid/blend
 
 ## Phase 3: Configure Claude Desktop
 
-Open the config file in Terminal:
+The config path is `~/Library/Application Support/Claude/claude_desktop_config.json`. It often already contains a `preferences` block — you need to **merge**, not replace.
 
-```bash
-open -e ~/Library/Application\ Support/Claude/claude_desktop_config.json
-```
+### If the file doesn't exist yet
 
-If it doesn't exist, create it. Paste:
+Create it with just this:
 
 ```json
 {
@@ -52,7 +50,19 @@ If it doesn't exist, create it. Paste:
 }
 ```
 
-Replace `/full/path/to/uvx` with what `which uvx` gave you. Using the full path instead of just `"uvx"` avoids the most common macOS gotcha where Claude Desktop can't find it.
+### If the file already exists
+
+Use `jq` to merge safely (preserves everything else):
+
+```bash
+UVX_PATH="$(which uvx)"
+CFG=~/Library/Application\ Support/Claude/claude_desktop_config.json
+jq --arg uvx "$UVX_PATH" '.mcpServers.blender = {command: $uvx, args: ["blender-mcp"]}' "$CFG" > "$CFG.tmp" && mv "$CFG.tmp" "$CFG"
+```
+
+No `jq`? `brew install jq` first, or edit by hand — add a top-level `"mcpServers": { "blender": { "command": "...", "args": ["blender-mcp"] } }` entry alongside your existing keys.
+
+Using the full path to `uvx` (instead of just `"uvx"`) avoids the most common macOS gotcha where Claude Desktop's PATH doesn't include Homebrew.
 
 Fully quit Claude Desktop (**Cmd+Q**, not just close the window) and reopen it.
 

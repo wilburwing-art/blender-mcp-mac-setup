@@ -88,9 +88,21 @@ Fully quit Claude Desktop (**Cmd+Q**, not just close the window) and reopen it.
 
 ## Phase 5: Voice
 
-On macOS the fastest path is built-in dictation: **System Settings > Keyboard > Dictation**, turn on, set a shortcut (double-tap `fn` works well). Then in Claude Desktop, double-tap `fn` and talk.
+### Option 1 — built-in macOS dictation (free, works everywhere)
 
-Whisper-based alternatives like [Superwhisper](https://superwhisper.com/) or [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper) are better quality and worth upgrading to later.
+**System Settings > Keyboard > Dictation**, turn on, set a shortcut (double-tap `fn` works well). Then in Claude Desktop, double-tap `fn` and talk. Accuracy is OK for short commands, noticeably worse on technical vocabulary and proper nouns.
+
+### Option 2 — Superwhisper (paid, best quality)
+
+[superwhisper.com](https://superwhisper.com/) — local Whisper models, low latency, good at technical speech. One-time purchase or subscription. Binds to a global hotkey and drops transcribed text into whatever app is focused, so it works with Claude Desktop out of the box.
+
+### Option 3 — MacWhisper (paid, batch-oriented)
+
+[MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper) is stronger on file transcription than on live dictation, so it's a weaker fit for this loop unless you already own it.
+
+### Which to pick
+
+Start with built-in dictation to confirm the end-to-end voice → Blender loop works. Upgrade to Superwhisper once you're doing longer or more technical prompts and the accuracy ceiling starts to hurt.
 
 ## Phase 6: A file to play with
 
